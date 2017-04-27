@@ -1,7 +1,5 @@
 package me.live.kinamare.api;
 
-import me.live.kinamare.R;
-import me.live.kinamare.Utils.AppApplication;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

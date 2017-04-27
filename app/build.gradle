@@ -1,5 +1,6 @@
-apply plugin: 'com.android.application'
+import java.text.SimpleDateFormat
 
+apply plugin: 'com.android.application'
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'     // ButterKnife (https://github.com/JakeWharton/butterknife)
 
@@ -20,6 +21,20 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+}
+
+android.applicationVariants.all { variant ->
+    def df = new SimpleDateFormat("yyyyMMdd")
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+
+    def buildTime = df.format(new Date())
+    def newApkName = 'kinamare-' + android.defaultConfig.versionName + '-' + variant.buildType.name + "-" + buildTime
+
+    variant.outputs.each { output ->
+        def newApkPath = output.outputFile.parent
+        def newAlignedApkPath = new File(newApkPath, 'aligned')
+        output.outputFile = new File(newAlignedApkPath, newApkName + '.apk')
     }
 }
 
@@ -48,4 +63,10 @@ dependencies {
     //RxJava
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.7'
+
+    //loading(progress) dialog minsdk 19 level
+    compile 'cc.cloudist.acplibrary:library:1.2.1'
+
+    //rxBinding
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
 }
