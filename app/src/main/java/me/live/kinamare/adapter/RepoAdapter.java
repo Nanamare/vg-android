@@ -8,14 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.live.kinamare.R;
 import me.live.kinamare.api.GithubService.Model.GitRepository;
-import me.live.kinamare.api.GithubService.Model.UserInfo;
 
 /**
  * Created by kinamare on 2017-04-26.
@@ -23,17 +21,12 @@ import me.live.kinamare.api.GithubService.Model.UserInfo;
 
 public class RepoAdapter extends BaseAdapter {
 
-	private static final int TYPE_USER = 0;
-	private static final int TYPE_REPO = 1;
-	private static final int TYPE_MAX = 2;
-
 	private Context context;
 	private List<GitRepository> gitRepositoryList;
 
-	public RepoAdapter(Context context, List<GitRepository> gitRepositoryList) {
+	public RepoAdapter(Context context) {
 		this.context = context;
 		this.gitRepositoryList = new ArrayList<>();
-		this.gitRepositoryList = gitRepositoryList;
 	}
 
 	@Override
@@ -70,10 +63,10 @@ public class RepoAdapter extends BaseAdapter {
 
 		/*
 			set holder
-		 */
-			viewHolder.gitRepoNameTv.setText(gitRepositoryList.get(position).name);
-			viewHolder.gitRepoDescriptionTv.setText(gitRepositoryList.get(position).description);
-			viewHolder.gitRepoStarCntTv.setText(String.valueOf(gitRepositoryList.get(position).stargazersCount));
+		*/
+		viewHolder.gitRepoNameTv.setText(gitRepositoryList.get(position).name);
+		viewHolder.gitRepoDescriptionTv.setText(gitRepositoryList.get(position).description);
+		viewHolder.gitRepoStarCntTv.setText(String.valueOf(gitRepositoryList.get(position).stargazersCount));
 
 		return convertView;
 	}
@@ -81,10 +74,6 @@ public class RepoAdapter extends BaseAdapter {
 	public void setGitRepositoryList(List<GitRepository> items) {
 		this.gitRepositoryList.clear();
 		this.gitRepositoryList = items;
-	}
-
-	public void setUserInfo(UserInfo userInfo) {
-
 	}
 
 

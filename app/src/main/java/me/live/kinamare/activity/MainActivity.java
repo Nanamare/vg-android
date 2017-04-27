@@ -1,5 +1,6 @@
 package me.live.kinamare.activity;
 
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,7 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -22,23 +24,28 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.live.kinamare.R;
 import me.live.kinamare.adapter.RepoAdapter;
-import me.live.kinamare.api.GithubService.GithubService;
 import me.live.kinamare.api.GithubService.GithubServiceManager;
 import me.live.kinamare.api.GithubService.Model.GitRepository;
 import me.live.kinamare.api.GithubService.Model.UserInfo;
+import me.live.kinamare.utils.Ascending;
 import retrofit2.Response;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AbsListView.OnScrollListener{
 
-	@BindView(R.id.gitUserImage) AppCompatImageView gitUserIv;
-	@BindView(R.id.gitUserName) AppCompatTextView gitUserTv;
 	@BindView(R.id.gitRepoLv) ListView gitRepoLv;
-	@BindView(R.id.userInfoll) LinearLayout userInfoll;
+
+	private AppCompatTextView gitUserTv;
+	private AppCompatImageView gitUserIv;
 
 	private List<GitRepository> gitRepoList;
+
 	private RepoAdapter adapter;
+
+	private int lastTopResult = 0;
+
+	private LinearLayout userInfoLayout;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,12 +53,8 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
 
-		gitRepoList = new ArrayList<>();
-		adapter = new RepoAdapter(this, gitRepoList);
-
-
-		gitRepoLv.setAdapter(adapter);
-
+		initListView();
+		addHeaderView();
 
 		Uri data = getIntent().getData();
 		if(data != null) {
@@ -59,6 +62,25 @@ public class MainActivity extends AppCompatActivity {
 			reqeustGitUserApi(hostName);
 			reqeustGitRepoApi(hostName);
 		}
+
+	}
+
+	private void addHeaderView() {
+
+		LayoutInflater inflater = getLayoutInflater();
+		ViewGroup header = (ViewGroup) inflater.inflate(R.layout.custom_header, gitRepoLv, false);
+		gitRepoLv.addHeaderView(header,null,false);
+		userInfoLayout = ButterKnife.findById(header,R.id.userInfoll);
+		gitUserIv = ButterKnife.findById(header,R.id.gitUserImage);
+		gitUserTv = ButterKnife.findById(header,R.id.gitUserName);
+		gitRepoLv.setOnScrollListener(this);
+
+	}
+
+	private void initListView() {
+		gitRepoList = new ArrayList<>();
+		adapter = new RepoAdapter(this);
+		gitRepoLv.setAdapter(adapter);
 
 	}
 
@@ -91,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
 				.into(gitUserIv);
 
 		gitUserTv.setText(userInfo.name);
-		adapter.setUserInfo(userInfo);
 
 	}
 
@@ -131,4 +152,20 @@ public class MainActivity extends AppCompatActivity {
 		return gitRepoList;
 	}
 
+	@Override
+	public void onScrollStateChanged(AbsListView absListView, int i) {
+
+	}
+
+	@Override
+	public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCnt, int totalItemCnt) {
+		Rect rect = new Rect();
+		userInfoLayout.getLocalVisibleRect(rect);
+		if(lastTopResult != rect.top){
+			lastTopResult = rect.top;
+			userInfoLayout.setY((float) (rect.top/2.0));
+		}
+
+
+	}
 }

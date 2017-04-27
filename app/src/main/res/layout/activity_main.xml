@@ -12,29 +12,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="me.live.kinamare.activity.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/userInfoll"
-        android:gravity="center_vertical"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="100.3dp">
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_weight="1"
-            android:id="@+id/gitUserImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:id="@+id/gitUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

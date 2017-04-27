@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_intent"
@@ -11,10 +12,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="me.live.kinamare.activity.IntentActivity">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/intentBtn"
-        android:text="앱실행 테스트"
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_marginBottom="20dp"
+        android:id="@+id/intentJakeTv"
+        android:text="testapp://repos/jakewharton"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-</RelativeLayout>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/intentNanaTv"
+        android:text="testapp://repos/nanamare"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

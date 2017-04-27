@@ -1,4 +1,4 @@
-package me.live.kinamare.activity;
+package me.live.kinamare.utils;
 
 import java.util.Comparator;
 
