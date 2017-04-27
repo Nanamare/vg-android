@@ -29,7 +29,7 @@ public class RepoAdapter extends BaseAdapter {
 		this.gitRepositoryList = new ArrayList<>();
 		this.gitRepositoryList = gitRepositoryList;
 	}
-	
+
 
 	@Override
 	public int getCount() {
@@ -67,7 +67,7 @@ public class RepoAdapter extends BaseAdapter {
 		 */
 			viewHolder.gitRepoNameTv.setText(gitRepositoryList.get(position).name);
 			viewHolder.gitRepoDescriptionTv.setText(gitRepositoryList.get(position).description);
-			viewHolder.gitRepoStarCntTv.setText(gitRepositoryList.get(position).stargazersCount);
+			viewHolder.gitRepoStarCntTv.setText(String.valueOf(gitRepositoryList.get(position).stargazersCount));
 
 		/*
 		* glide
@@ -79,6 +79,11 @@ public class RepoAdapter extends BaseAdapter {
 				.into(civPhoto);
 		*/
 		return convertView;
+	}
+
+	public void setGitRepositoryList(List<GitRepository> items) {
+		this.gitRepositoryList.clear();
+		this.gitRepositoryList = items;
 	}
 
 	public static class ViewHolder {

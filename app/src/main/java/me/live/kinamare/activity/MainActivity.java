@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
 		gitRepoList = new ArrayList<>();
 		adapter = new RepoAdapter(this, gitRepoList);
+		gitRepoLv.setAdapter(adapter);
+
 		reqeustGitRepoApi();
 	}
 
@@ -64,9 +66,8 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void setGitRepoList(List<GitRepository> gitRepoList) {
-
-
-
+		adapter.setGitRepositoryList(gitRepoList);
+		adapter.notifyDataSetChanged();
 	}
 
 }
