@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -69,15 +70,6 @@ public class RepoAdapter extends BaseAdapter {
 			viewHolder.gitRepoDescriptionTv.setText(gitRepositoryList.get(position).description);
 			viewHolder.gitRepoStarCntTv.setText(String.valueOf(gitRepositoryList.get(position).stargazersCount));
 
-		/*
-		* glide
-		Glide.with(context)
-				.load(R.drawable.dummy_profile)
-				.centerCrop()
-				.placeholder(new ColorDrawable(context.getResources().getColor(R.color.black_7)))
-				.crossFade()
-				.into(civPhoto);
-		*/
 		return convertView;
 	}
 

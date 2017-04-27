@@ -4,6 +4,7 @@ package me.live.kinamare.api.GithubService;
 import java.util.List;
 
 import me.live.kinamare.api.GithubService.Model.GitRepository;
+import me.live.kinamare.api.GithubService.Model.UserInfo;
 import me.live.kinamare.api.ServiceDefine;
 import retrofit2.Response;
 import rx.Observable;
@@ -19,6 +20,11 @@ public final class GithubServiceManager {
 
 	public static Observable<Response<List<GitRepository>>> getRepoList(String owner){
 		return SERVICE.getRepoList(owner)
+				.subscribeOn(Schedulers.io());
+	}
+
+	public static Observable<Response<UserInfo>> getUserInfo(String owner){
+		return SERVICE.getGitUserInfo(owner)
 				.subscribeOn(Schedulers.io());
 	}
 }

@@ -119,7 +119,7 @@ public class GitRepository implements Serializable {
 	@SerializedName("size")
 	public Integer size;
 	@SerializedName("stargazers_count")
-	public Integer stargazersCount;
+	public int stargazersCount;
 	@SerializedName("watchers_count")
 	public Integer watchersCount;
 	@SerializedName("language")
