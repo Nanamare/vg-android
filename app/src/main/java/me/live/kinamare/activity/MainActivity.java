@@ -7,11 +7,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 	@BindView(R.id.gitUserImage) AppCompatImageView gitUserIv;
 	@BindView(R.id.gitUserName) AppCompatTextView gitUserTv;
 	@BindView(R.id.gitRepoLv) ListView gitRepoLv;
+	@BindView(R.id.userInfoll) LinearLayout userInfoll;
 
 	private List<GitRepository> gitRepoList;
 	private RepoAdapter adapter;
@@ -51,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
 			reqeustGitUserApi(hostName);
 			reqeustGitRepoApi(hostName);
 		}
-
-
-
 
 	}
 
@@ -113,10 +115,17 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void setGitRepoList(List<GitRepository> gitRepoList) {
-//		정렬 만들것
-// 		adapter.descendingSort(gitRepoList);
-		adapter.setGitRepositoryList(gitRepoList);
+
+		adapter.setGitRepositoryList(descendingSort(gitRepoList));
 		adapter.notifyDataSetChanged();
+
+	}
+
+	public List<GitRepository> descendingSort(List<GitRepository> gitRepoList) {
+		Ascending ascending = new Ascending();
+		Collections.sort(gitRepoList,ascending);
+
+		return gitRepoList;
 	}
 
 }

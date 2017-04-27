@@ -78,6 +78,7 @@ public class RepoAdapter extends BaseAdapter {
 		this.gitRepositoryList = items;
 	}
 
+
 	public static class ViewHolder {
 
 		@BindView(R.id.gitRepoNameTv) AppCompatTextView gitRepoNameTv;

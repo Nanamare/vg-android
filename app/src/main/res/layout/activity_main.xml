@@ -13,6 +13,7 @@
     tools:context="me.live.kinamare.activity.MainActivity">
 
     <LinearLayout
+        android:id="@+id/userInfoll"
         android:gravity="center_vertical"
         android:weightSum="2"
         android:orientation="horizontal"
