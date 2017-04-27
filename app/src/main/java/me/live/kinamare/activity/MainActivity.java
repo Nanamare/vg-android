@@ -48,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
 		gitRepoList = new ArrayList<>();
 		adapter = new RepoAdapter(this, gitRepoList);
+
+
 		gitRepoLv.setAdapter(adapter);
+
 
 		Uri data = getIntent().getData();
 		if(data != null) {
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 				.into(gitUserIv);
 
 		gitUserTv.setText(userInfo.name);
+		adapter.setUserInfo(userInfo);
 
 	}
 
@@ -124,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
 	public List<GitRepository> descendingSort(List<GitRepository> gitRepoList) {
 		Ascending ascending = new Ascending();
 		Collections.sort(gitRepoList,ascending);
-
 		return gitRepoList;
 	}
 

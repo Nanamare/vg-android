@@ -15,12 +15,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.live.kinamare.R;
 import me.live.kinamare.api.GithubService.Model.GitRepository;
+import me.live.kinamare.api.GithubService.Model.UserInfo;
 
 /**
  * Created by kinamare on 2017-04-26.
  */
 
 public class RepoAdapter extends BaseAdapter {
+
+	private static final int TYPE_USER = 0;
+	private static final int TYPE_REPO = 1;
+	private static final int TYPE_MAX = 2;
 
 	private Context context;
 	private List<GitRepository> gitRepositoryList;
@@ -30,7 +35,6 @@ public class RepoAdapter extends BaseAdapter {
 		this.gitRepositoryList = new ArrayList<>();
 		this.gitRepositoryList = gitRepositoryList;
 	}
-
 
 	@Override
 	public int getCount() {
@@ -51,6 +55,7 @@ public class RepoAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		final ViewHolder viewHolder;
+
 
 		if (convertView == null) {
 
@@ -78,6 +83,10 @@ public class RepoAdapter extends BaseAdapter {
 		this.gitRepositoryList = items;
 	}
 
+	public void setUserInfo(UserInfo userInfo) {
+
+	}
+
 
 	public static class ViewHolder {
 
@@ -91,4 +100,6 @@ public class RepoAdapter extends BaseAdapter {
 			ButterKnife.bind(this, view);
 		}
 	}
+
+
 }

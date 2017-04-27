@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 public class GitRepository implements Serializable {
 
+
 	@SerializedName("id")
 	public Integer id;
 	@SerializedName("name")
