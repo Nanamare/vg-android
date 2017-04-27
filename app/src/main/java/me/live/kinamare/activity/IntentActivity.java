@@ -28,7 +28,7 @@ public class IntentActivity extends AppCompatActivity {
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.addCategory(Intent.CATEGORY_DEFAULT);
 				intent.addCategory(Intent.CATEGORY_BROWSABLE);
-				intent.setData(Uri.parse("testapp://repos/nanamare"));
+				intent.setData(Uri.parse("testapp://repos/jakewharton"));
 				startActivity(intent);
 
 			}

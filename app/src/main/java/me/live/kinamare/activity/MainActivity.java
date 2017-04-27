@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
 			reqeustGitRepoApi(hostName);
 		}
 
-//		reqeustGitUserApi();
-//		reqeustGitRepoApi();
 
 
 
