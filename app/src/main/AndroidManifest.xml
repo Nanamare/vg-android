@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="me.live.kinamare">
 
-
     <!-- 네트워크 사용 권한 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -15,22 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/NoAppBarTheme">
         <activity android:name=".activity.MainActivity">
+
+            <!-- 앱 링크 등록 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="repos"
+                    android:scheme="testapp"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.IntentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
-            <!-- 앱 링크 등록-->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:host="testapp"
-                    android:scheme="repos"/>
-            </intent-filter>
-
         </activity>
     </application>
 

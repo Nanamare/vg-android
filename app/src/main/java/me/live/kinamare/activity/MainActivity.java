@@ -47,19 +47,20 @@ public class MainActivity extends AppCompatActivity {
 
 		Uri data = getIntent().getData();
 		if(data != null) {
-			String userName = data.getQuery();
-
+			String hostName = data.getLastPathSegment();
+			reqeustGitUserApi(hostName);
+			reqeustGitRepoApi(hostName);
 		}
 
-		reqeustGitUserApi();
-		reqeustGitRepoApi();
+//		reqeustGitUserApi();
+//		reqeustGitRepoApi();
 
 
 
 	}
 
-	private void reqeustGitUserApi() {
-		GithubServiceManager.getUserInfo("JakeWharton")
+	private void reqeustGitUserApi(String hostName) {
+		GithubServiceManager.getUserInfo(hostName)
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(new Subscriber<Response<UserInfo>>() {
 					@Override
@@ -90,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 
-	private void reqeustGitRepoApi() {
+	private void reqeustGitRepoApi(String hostName) {
 
-		GithubServiceManager.getRepoList("JakeWharton")
+		GithubServiceManager.getRepoList(hostName)
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(new Subscriber<Response<List<GitRepository>>>() {
 					@Override
